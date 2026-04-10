@@ -70,27 +70,16 @@
         </div>
     </section>
 
-    <!-- Threat Intel Ticker -->
+    <!-- Threat Intel Ticker (items rendered by JS, see main.js) -->
     <section class="ticker-section">
-        <div class="ticker-wrap" id="ticker">
-            <div class="ticker-item"><span class="tag">[CVE-2024-3400]</span> PAN-OS GlobalProtect Command Injection, Critical</div>
-            <div class="ticker-item"><span class="tag">[THREAT]</span> Kinsing crypto miner variant detected in honeynet, Active Campaign</div>
-            <div class="ticker-item"><span class="tag">[CVE-2024-21887]</span> Ivanti Connect Secure Auth Bypass, Actively Exploited</div>
-            <div class="ticker-item"><span class="tag">[MALWARE]</span> Rondodox/Mirai variant, IoT botnet C2 traffic captured</div>
-            <div class="ticker-item"><span class="tag">[INTEL]</span> APT29 spear-phishing campaign targeting energy sector, CISA Advisory</div>
-            <div class="ticker-item"><span class="tag">[CVE-2024-3400]</span> PAN-OS GlobalProtect Command Injection, Critical</div>
-            <div class="ticker-item"><span class="tag">[THREAT]</span> Kinsing crypto miner variant detected in honeynet, Active Campaign</div>
-            <div class="ticker-item"><span class="tag">[CVE-2024-21887]</span> Ivanti Connect Secure Auth Bypass, Actively Exploited</div>
-            <div class="ticker-item"><span class="tag">[MALWARE]</span> Rondodox/Mirai variant, IoT botnet C2 traffic captured</div>
-            <div class="ticker-item"><span class="tag">[INTEL]</span> APT29 spear-phishing campaign targeting energy sector, CISA Advisory</div>
-        </div>
+        <div class="ticker-wrap" id="ticker"></div>
     </section>
 
     <!-- Chat Widget -->
     <button class="chat-toggle" id="chatToggle" aria-label="Open chat">
         <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
     </button>
-    <div class="chat-panel" id="chatPanel">
+    <div class="chat-panel" id="chatPanel" style="display:none;">
         <div class="chat-header">
             <h4>&gt; PacketBot_</h4>
             <button class="chat-close" id="chatClose">&times;</button>

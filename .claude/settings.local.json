@@ -32,7 +32,10 @@
       "Bash(cp \"My Daughter.png\" daughter.png)",
       "Bash(cp \"One of my crazy Dogs named Kiaba.JPG\" dog-kiaba.jpg)",
       "Bash(cp \"One of my first combat load jumps.jpg\" airborne-jump.jpg)",
-      "Bash(cp \"some Highstakes Poker.jpg\" poker.jpg)"
+      "Bash(cp \"some Highstakes Poker.jpg\" poker.jpg)",
+      "Bash(ls -la assets/*.pdf assets/Resume.pdf assets/Cover-Letter.pdf)",
+      "Bash(file assets/*.pdf)",
+      "Bash(git mv:*)"
     ]
   }
 }

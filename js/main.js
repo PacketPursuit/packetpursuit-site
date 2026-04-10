@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 90);
     }
 
+    // ===== THREAT INTEL TICKER (single source of truth, init once) =====
+    initTicker();
+
     // ===== INTERSECTION OBSERVER, FADE IN =====
     const fadeEls = document.querySelectorAll('.fade-in');
     if (fadeEls.length > 0) {
@@ -63,17 +66,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatMessages = document.getElementById('chatMessages');
 
     if (chatToggle && chatPanel) {
+        // Ensure panel is hidden on load regardless of any cached state
+        chatPanel.style.display = 'none';
+        chatPanel.classList.remove('open');
+
+        function openChat() {
+            chatPanel.style.display = 'flex';
+            // Force reflow so the opacity/transform transition can play
+            void chatPanel.offsetWidth;
+            chatPanel.classList.add('open');
+            if (chatInput) chatInput.focus();
+        }
+
+        function closeChat() {
+            chatPanel.classList.remove('open');
+            // Wait for the transition to finish before fully hiding
+            setTimeout(() => {
+                if (!chatPanel.classList.contains('open')) {
+                    chatPanel.style.display = 'none';
+                }
+            }, 320);
+        }
+
         chatToggle.addEventListener('click', () => {
-            chatPanel.classList.toggle('open');
-            if (chatPanel.classList.contains('open') && chatInput) {
-                chatInput.focus();
+            if (chatPanel.classList.contains('open')) {
+                closeChat();
+            } else {
+                openChat();
             }
         });
 
         if (chatClose) {
-            chatClose.addEventListener('click', () => {
-                chatPanel.classList.remove('open');
-            });
+            chatClose.addEventListener('click', closeChat);
         }
 
         // Send message
@@ -145,6 +169,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+// ===== THREAT INTEL TICKER =====
+const TICKER_ITEMS = [
+    { tag: 'CVE-2024-3400',  text: 'PAN-OS GlobalProtect Command Injection, Critical' },
+    { tag: 'THREAT',         text: 'Kinsing crypto miner variant detected in honeynet, Active Campaign' },
+    { tag: 'CVE-2024-21887', text: 'Ivanti Connect Secure Auth Bypass, Actively Exploited' },
+    { tag: 'MALWARE',        text: 'Rondodox/Mirai variant, IoT botnet C2 traffic captured' },
+    { tag: 'INTEL',          text: 'APT29 spear-phishing campaign targeting energy sector, CISA Advisory' },
+];
+
+let tickerInitialized = false;
+
+function initTicker() {
+    if (tickerInitialized) return;
+    const wrap = document.getElementById('ticker');
+    if (!wrap) return;
+    // Clear any server-rendered items before populating
+    wrap.innerHTML = '';
+    // Render the deduplicated list twice so the CSS marquee scroll is seamless
+    // (the -50% translate keyframe requires two consecutive copies of the same content)
+    for (let copy = 0; copy < 2; copy++) {
+        TICKER_ITEMS.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'ticker-item';
+            if (copy === 1) div.setAttribute('aria-hidden', 'true');
+            const span = document.createElement('span');
+            span.className = 'tag';
+            span.textContent = '[' + item.tag + ']';
+            div.appendChild(span);
+            div.appendChild(document.createTextNode(' ' + item.text));
+            wrap.appendChild(div);
+        });
+    }
+    tickerInitialized = true;
+}
 
 // ===== PROJECT DETAIL TOGGLE (global for onclick) =====
 function toggleDetail(id) {
