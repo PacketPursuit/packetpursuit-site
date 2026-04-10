@@ -40,10 +40,10 @@
         <div class="container">
             <div class="projects-grid">
 
-                <!-- FEATURED: Honeynet Capstone -->
+                <!-- FEATURED: Honeynet Research Platform -->
                 <div class="project-card featured fade-in">
                     <span class="featured-tag">Featured</span>
-                    <h3>Honeynet Research Platform, Academic Capstone</h3>
+                    <h3>Honeynet Research Platform</h3>
                     <div class="project-tags">
                         <span>Apache Guacamole</span>
                         <span>Active Directory</span>
@@ -52,34 +52,62 @@
                         <span>MISP</span>
                         <span>OpenCTI</span>
                         <span>Ghidra</span>
-                        <span>Palo Alto</span>
-                        <span>Juniper</span>
+                        <span>Palo Alto PA-3410</span>
+                        <span>Juniper EX4300</span>
                     </div>
                     <p>
-                        From-scratch honeynet deployment built to simulate a vulnerable agricultural IoT startup. Captured live malware within hours of going live. Full detection stack, real adversary behavior, real lessons learned.
+                        From-scratch honeynet built to simulate a vulnerable agricultural IoT startup. Captured live malware including a Mirai botnet variant and a crypto miner within hours of going live. Full detection stack, real adversary TTPs, documented lessons learned.
                     </p>
                     <div class="project-detail" id="detail-honeynet">
                         <p>
-                            This was not a script or a template deployment. This project was built entirely from the ground up as part of my capstone at Pima Community College, and it required planning and execution across every layer of the stack.
+                            This project was built entirely from the ground up as a capstone at Pima Community College. No templates, no T-Pot scripts. Everything was planned, built, and operated manually across every layer of the stack.
                         </p>
                         <p>
-                            The concept: simulate a small agricultural IoT startup that appeared to have accidentally exposed pre-launch infrastructure. A full company identity was created including a public-facing website (agricultureintech.net), six employee personas, and a convincing web presence targeting an underserved and high-value attack surface for nation-state actors.
+                            The concept was to simulate an agricultural IoT startup that appeared to have accidentally pre-exposed infrastructure. A full company identity was created including a public-facing website (agricultureintech.net), six employee personas with seeded credentials pulled from known breach datasets and common wordlists including RockYou, and a convincing web presence targeting what is genuinely an underserved and high-value attack surface for nation-state actors.
                         </p>
                         <p>
-                            The front end consisted of an Apache web server with TLS/SSL configured, proper DNS and CNAME records, and Apache Guacamole running on Tomcat as a deceptive RDP portal. The back end ran a Windows Server 2019 domain controller with two Windows 11 workstations. Credentials were seeded from known breach data and common wordlists including RockYou to make the environment appear legitimately misconfigured.
+                            Front end: Apache web server with TLS/SSL, proper DNS and CNAME records, Apache Guacamole running on Tomcat as a deceptive RDP portal. Back end: Windows Server 2019 domain controller with two Windows 11 workstations. CVE selection focused on the past two years of disclosed vulnerabilities. Final selections included an older ActiveMQ instance with a known RCE vulnerability, Jenkins, and Metabase. The environment received its first malware within six hours of going live.
                         </p>
                         <p>
-                            Multiple CVEs were researched and selected for deployment, targeting the past two years of disclosed vulnerabilities. The final selections included an older ActiveMQ instance with a known RCE vulnerability alongside Jenkins and Metabase. The environment was live and receiving malware within six hours.
-                        </p>
-                        <p>
-                            The initial architecture containerized everything including Elasticsearch, Kibana, Logstash, OpenCTI, MISP, and Arkime in separate containers managed through Portainer. This introduced cascading stability issues. After troubleshooting, the decision was made to migrate to Security Onion as the primary SIEM and detection platform, with OpenCTI running in a standalone Debian VM on systemd rather than containerized. This was the right call and one of the key lessons learned from the project.
+                            Initial architecture containerized everything through Portainer including Elasticsearch, Kibana, Logstash, OpenCTI, MISP, and Arkime in separate containers. This created cascading stability issues. After troubleshooting, the team migrated to Security Onion as the primary SIEM and detection platform, with OpenCTI running in a standalone Debian VM on systemd. That was the right call and one of the key lessons from the project.
                         </p>
                         <p>
                             Hardware: Dell PowerEdge R6515, Palo Alto PA-3410 firewall, Juniper EX4300 switch.
                         </p>
                         <p>
-                            The project produced documented TTPs from real adversary behavior, malware samples submitted for analysis, and a formal research paper comparing observed techniques to known threat actor playbooks.
+                            Malware captured: RondoDox (ELF64, statically linked, musl libc, 9-layer custom XOR encryption, 15+ DDoS attack vectors, SSH propagation, competition killer that terminates rival malware, anti-analysis targeting 16+ security tools) and Kinsing (5.9MB Go binary, 3,826 functions, full C2 infrastructure, deploys XMRig miner kdevtmpfsi that ran at 401% CPU). Full static and dynamic analysis performed using Ghidra 11.3.1, objdump, readelf, and strings. Both binaries fully documented with SHA-256 hashes, IOCs, and MITRE ATT&amp;CK mappings.
                         </p>
+                        <p>
+                            Theory on infection chain: RondoDox likely acted as a loader-as-a-service entry point. Initial infection established persistence and exfiltrated the endpoint into a compromised pool. That pool was then sold or leased, and a separate operator delivered the Kinsing/XMRig payload through a second C2 server. This is consistent with documented RondoDox LaaS behavior reported by CloudSEK, Trend Micro, and FortiGuard in mid-to-late 2025.
+                        </p>
+
+                        <!-- Screenshot Gallery -->
+                        <div class="screenshot-gallery">
+                            <figure onclick="openLightbox(this)">
+                                <img src="assets/screenshots/elk-alerts.png" alt="ELK alerts dashboard">
+                                <figcaption>ELK alerts: 1,215 total, 255 critical, 960 high severity across the agricultureintech host</figcaption>
+                            </figure>
+                            <figure onclick="openLightbox(this)">
+                                <img src="assets/screenshots/security-onion-dashboard.png" alt="Security Onion dashboard">
+                                <figcaption>Security Onion dashboard: 784,338 log events captured during the operation</figcaption>
+                            </figure>
+                            <figure onclick="openLightbox(this)">
+                                <img src="assets/screenshots/malware-detection-alerts.png" alt="Malware detection alerts">
+                                <figcaption>Malware detection alerts showing RondoDox and Kinsing binary modifications in real time</figcaption>
+                            </figure>
+                            <figure onclick="openLightbox(this)">
+                                <img src="assets/screenshots/terminal-kinsing.png" alt="Terminal Kinsing extraction">
+                                <figcaption>Live forensic extraction of the Kinsing binary from the compromised server</figcaption>
+                            </figure>
+                            <figure onclick="openLightbox(this)">
+                                <img src="assets/screenshots/lsof-deleted.png" alt="lsof deleted processes">
+                                <figcaption>lsof output showing deleted cron and wget processes, fileless persistence mechanism</figcaption>
+                            </figure>
+                            <figure onclick="openLightbox(this)">
+                                <img src="assets/screenshots/apache-memfd.png" alt="Apache memfd entries">
+                                <figcaption>memfd:opcache_lock entries in Apache process space, memory-only payload staging</figcaption>
+                            </figure>
+                        </div>
                     </div>
                     <div class="project-links">
                         <button class="expand-btn" onclick="toggleDetail('honeynet')">[ details ]</button>
@@ -93,21 +121,20 @@
                     <div class="project-tags">
                         <span>Dell PowerEdge</span>
                         <span>pfSense</span>
-                        <span>UniFi</span>
+                        <span>UniFi US-8-60W</span>
                         <span>Proxmox</span>
                         <span>Docker</span>
                         <span>ELK</span>
                     </div>
                     <p>
-                        Enterprise-grade home lab built on Dell PowerEdge servers running Proxmox virtualization. Segmented network with pfSense firewalls and an ELK monitoring stack. Switching handled by a Ubiquiti UniFi 8-port managed switch with VLANs configured for network segmentation. Serves as the foundation for all research, testing, and training.
+                        Enterprise-grade home lab built on Dell PowerEdge servers running Proxmox virtualization. Segmented network with pfSense firewalls and an ELK monitoring stack. Switching is handled by a Ubiquiti UniFi US-8-60W managed switch with VLANs configured for network segmentation. Serves as the foundation for all research, testing, and training.
                     </p>
                     <div class="project-detail" id="detail-homelab">
                         <p>
                             Infrastructure includes multiple VMs for project testing, sandbox environments, and ongoing research, a dedicated malware analysis sandbox, Active Directory lab environment, and containerized services via Docker. Network monitoring covers all segments with Zeek and Suricata. Regular vulnerability scanning with OpenVAS. All configurations managed as code for reproducibility.
                         </p>
-                        <p style="color: var(--text-secondary); font-style: italic; font-family: var(--font-mono); font-size: 0.8rem;">
-                            [ Home lab topology diagram, to be added ]
-                        </p>
+                        <img src="assets/homelab-photo.png" alt="Home lab rack" class="project-img">
+                        <img src="assets/homelab-topology.png" alt="Home lab network topology" class="project-img">
                     </div>
                     <div class="project-links">
                         <button class="expand-btn" onclick="toggleDetail('homelab')">[ details ]</button>
@@ -121,7 +148,7 @@
                         <span>Email Headers</span>
                         <span>OSINT</span>
                         <span>Python</span>
-                        <span>MITRE ATT&CK</span>
+                        <span>MITRE ATT&amp;CK</span>
                     </div>
                     <p>
                         Analyzed real-world business email compromise (BEC) and spear-phishing campaigns. Performed header analysis, sender reputation checks, URL/domain investigation, and payload extraction. Mapped tactics to MITRE ATT&amp;CK framework and produced incident reports.
@@ -130,9 +157,9 @@
                         <p>
                             Developed Python scripts for automated header parsing and IOC extraction. Created detection rules for common BEC patterns. Documented social engineering techniques observed in the wild and built awareness training materials based on findings.
                         </p>
-                        <p style="color: var(--text-secondary); font-style: italic; font-family: var(--font-mono); font-size: 0.8rem;">
-                            [ Google Slides presentation embedded here, link to be added ]
-                        </p>
+                        <div class="slides-embed">
+                            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ3GT2MMK3WD4EDOQe54l1zph2Bwoq2TBfABIWMyIoy2pA24yTSKgjOAHlvDaxfPQ/pubembed?start=true&amp;loop=true&amp;delayms=3000" frameborder="0" width="100%" height="480" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                        </div>
                     </div>
                     <div class="project-links">
                         <button class="expand-btn" onclick="toggleDetail('phishing')">[ details ]</button>
@@ -195,6 +222,13 @@
             </div>
         </div>
     </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
 
     <!-- Footer -->
     <footer>

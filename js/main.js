@@ -156,3 +156,40 @@ function toggleDetail(id) {
         btn.textContent = detail.classList.contains('open') ? '[ collapse ]' : '[ details ]';
     }
 }
+
+// ===== LIGHTBOX (screenshot gallery) =====
+function openLightbox(figureEl) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    const cap = document.getElementById('lightbox-caption');
+    if (!lb || !img) return;
+    const src = figureEl.querySelector('img').src;
+    const caption = figureEl.querySelector('figcaption') ? figureEl.querySelector('figcaption').textContent : '';
+    img.src = src;
+    if (cap) cap.textContent = caption;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    if (!lb) return;
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// Close lightbox on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+});
+
+// ===== BLOG POST TOGGLE =====
+function toggleBlogPost(id) {
+    const content = document.getElementById('post-' + id);
+    if (!content) return;
+    content.classList.toggle('open');
+    const link = content.previousElementSibling;
+    if (link && link.classList.contains('read-more')) {
+        link.textContent = content.classList.contains('open') ? 'collapse ↑' : 'read more →';
+    }
+}
