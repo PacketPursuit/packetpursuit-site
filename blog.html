@@ -141,6 +141,22 @@
                 <div class="post-card threat-watch-auto">
                     <div class="post-meta">April 10, 2026</div>
                     <h3 class="post-title">Iran's Back in U.S. OT, and They Didn't Need a Zero-Day</h3>
+                    <div class="post-tags"><span class="tag">OT/ICS</span><span class="tag">Threat Intel</span><span class="tag">Nation-State</span><span class="tag">Critical Infrastructure</span></div>
+                    <p class="post-excerpt">CISA's AA26-097A warns that Iran-linked APTs, likely CyberAv3ngers, are abusing internet-exposed Rockwell/Allen-Bradley PLCs to disrupt U.S. water, energy, and local government. No zero-day required, just bad exposure.</p>
+                    <div class="post-body" style="display:none;"><p>CISA dropped AA26-097A this week and it pulled me right in. Iran-linked actors are back in U.S. critical infrastructure, and they are not bothering with fancy zero-days. They are walking through the front door on internet-exposed PLCs.</p>
+
+<p>The advisory, co-sealed by CISA, FBI, NSA, EPA and DoE on April 7, names the target: Rockwell Automation / Allen-Bradley PLCs sitting on the public internet. The operators are reaching in with Studio 5000 Logix Designer from leased overseas infrastructure, opening legitimate sessions to the controllers, and messing with project files and HMI/SCADA displays. Water and wastewater, local government, and energy sector victims have already reported operational disruption.</p>
+
+<p>If the TTPs sound familiar, they should. This lines up with CyberAv3ngers, aka Shahid Kaveh Group, the IRGC Cyber Electronic Command crew that lit up the Aliquippa water authority back in 2023 by hitting Unitronics Vision PLCs with default creds. Same playbook, new vendor. Escalation is tracking with the current Iran / U.S. / Israel tensions, and NERC says it is actively watching the grid.</p>
+
+<p>What bugs me is that none of this requires a CVE. It is exposed ICS on TCP/44818 and 2222, weak or default authentication, and engineering workstations trusting any source that speaks EtherNet/IP. A Shodan query and a copy of Studio 5000 is most of the kill chain.</p>
+
+<p>Practical takeaway: if you own OT, stop assuming obscurity is a control. Pull your PLCs off the public internet today, put them behind a properly segmented DMZ with a jump host, enforce CIP Security or at minimum strong auth, and alert on any Logix session from an unknown source. If you cannot tell me the last time someone audited your HMI's exposure, that is the project for Monday morning.</p></div>
+                    <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
+                </div>
+                <div class="post-card threat-watch-auto">
+                    <div class="post-meta">April 10, 2026</div>
+                    <h3 class="post-title">Iran's Back in U.S. OT, and They Didn't Need a Zero-Day</h3>
                     <div class="post-tags"><span class="tag">Threat Intel</span><span class="tag">Cybersecurity</span></div>
                     <p class="post-excerpt">CISA's AA26-097A warns that Iran-linked APTs, likely CyberAv3ngers, are abusing internet-exposed Rockwell/Allen-Bradley PLCs to disrupt U.S. water, energy, and local government. No zero-day required, just bad exposure.</p>
                     <div class="post-body" style="display:none;"><p>CISA dropped AA26-097A this week and it pulled me right in. Iran-linked actors are back in U.S. critical infrastructure, and they are not bothering with fancy zero-days. They are walking through the front door on internet-exposed PLCs.</p>
