@@ -8,6 +8,11 @@ Receives generated threat intel content and:
 
 Usage:
   python post_threat_watch.py --title "Title" --excerpt "Short excerpt" --body "Full body text" --source-url "https://..." --tags "tag1,tag2"
+
+  # Any string arg can also read from a file by prefixing with @:
+  python post_threat_watch.py --title "Title" --excerpt @excerpt.txt --body @body.html --tags "tag1,tag2"
+
+  # File paths can be absolute or relative to the repo root.
 """
 
 import argparse
@@ -82,22 +87,45 @@ def git_push(title):
     except subprocess.CalledProcessError as e:
         print(f"Git error: {e}")
 
+def resolve_arg(value):
+    """
+    If value starts with '@', treat the rest as a file path and return the file contents.
+    File paths can be absolute or relative to the repo root. This lets callers avoid
+    shell quoting hell for long bodies with HTML, quotes, or newlines.
+    """
+    if value is None or not value.startswith("@"):
+        return value
+    raw_path = value[1:]
+    path = Path(raw_path)
+    if not path.is_absolute():
+        path = REPO_ROOT / raw_path
+    if not path.is_file():
+        raise SystemExit(f"ERROR: --body/--excerpt/--title file reference not found: {path}")
+    return path.read_text(encoding="utf-8").strip()
+
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--title", required=True)
-    parser.add_argument("--excerpt", required=True)
-    parser.add_argument("--body", required=True)
+    parser = argparse.ArgumentParser(
+        description="Post a ThreatWatch entry to Discord and the blog. Use @path/to/file for long content."
+    )
+    parser.add_argument("--title", required=True, help="Post title, or @file.txt")
+    parser.add_argument("--excerpt", required=True, help="1-2 sentence preview, or @file.txt")
+    parser.add_argument("--body", required=True, help="Full HTML body, or @file.html (recommended for long content)")
     parser.add_argument("--source-url", default="https://packetpursuit.net/blog")
-    parser.add_argument("--tags", default="Threat Intel,Cybersecurity")
+    parser.add_argument("--tags", default="Threat Intel,Cybersecurity", help="Comma-separated tags")
     args = parser.parse_args()
+
+    # Resolve @file references for the long-text args
+    title = resolve_arg(args.title)
+    excerpt = resolve_arg(args.excerpt)
+    body = resolve_arg(args.body)
 
     tags = [t.strip() for t in args.tags.split(",")]
     date_str = datetime.now().strftime("%B %d, %Y")
 
-    post_to_discord(args.title, args.excerpt, args.source_url, tags, date_str)
-    injected = inject_blog_post(args.title, args.excerpt, args.body, tags, date_str)
+    post_to_discord(title, excerpt, args.source_url, tags, date_str)
+    injected = inject_blog_post(title, excerpt, body, tags, date_str)
     if injected:
-        git_push(args.title)
+        git_push(title)
 
 if __name__ == "__main__":
     main()
