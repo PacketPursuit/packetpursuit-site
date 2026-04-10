@@ -2,3 +2,8 @@ js/config.js
 .DS_Store
 node_modules/
 *.log
+
+# ThreatWatch automation scratch files (see scripts/post_threat_watch.py)
+scripts/body.html
+scripts/excerpt.txt
+scripts/title.txt
