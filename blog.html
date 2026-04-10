@@ -40,57 +40,94 @@
         <div class="container">
             <div class="blog-grid">
 
-                <!-- Field Notes (Manual) -->
+                <!-- Field Notes (Manual, Jake's own work) -->
                 <div class="blog-column fade-in">
                     <h2>&gt; Field Notes_</h2>
                     <p class="column-desc">Organic writeups, analysis, and research straight from the lab. My own words, my own work.</p>
 
+                    <!-- Rondodox LaaS post (moved here from Threat Watch) -->
                     <div class="post-card">
-                        <p class="post-date">2026-03-15</p>
-                        <h3>Dissecting a Mirai Variant: From Honeynet Capture to Ghidra</h3>
+                        <div class="post-meta">April 10, 2026</div>
+                        <h3 class="post-title">Was My Honeypot Part of a Loader-as-a-Service Operation?</h3>
+                        <div class="post-tags">
+                            <span>Threat Intel</span>
+                            <span>Malware</span>
+                            <span>RondoDox</span>
+                            <span>Kinsing</span>
+                            <span>Botnet</span>
+                        </div>
+                        <p class="post-excerpt">When RondoDox hit our honeypot and Kinsing followed six hours later from a different C2, I had a theory. Turns out the research backs it up.</p>
+                        <div class="post-body" style="display:none;">
+                            <p>When our honeypot at agricultureintech.net went live, it took less than six hours to receive its first malware. RondoDox came in first, established persistence, and went quiet. Then approximately six hours later, a separate C2 server delivered Kinsing along with an XMRig miner that immediately began consuming 401% CPU mining Monero.</p>
+                            <p>At the time, the working theory among the team was that this might be a turf war between competing malware operators. That is a documented phenomenon. But something about the timing felt too clean. RondoDox came in like a scout. Kinsing came in like a payload.</p>
+                            <p>The theory I kept coming back to was this: RondoDox did not just infect us. It processed us. It added our endpoint to a pool of compromised machines, and that pool was sold or leased to a Kinsing operator who then pushed their payload to the entire batch. We were not a target. We were inventory.</p>
+                            <p>As it turns out, the research supports this. CloudSEK documented a large-scale Loader-as-a-Service botnet distributing RondoDox, Mirai, and Morte payloads, with a 230% attack spike in mid-2025. Trend Micro's analysis confirmed that RondoDox broadened its distribution using a loader-as-a-service infrastructure that co-packages payloads and delivers them to compromised endpoint pools. FortiGuard observed the same hybrid infrastructure.</p>
+                            <p>The operational picture is straightforward. RondoDox is the acquisition layer. It uses an exploit shotgun approach, firing dozens of known CVEs at internet-exposed infrastructure until something lands. Once it gets in, it establishes persistence and checks in. The infected endpoint gets aggregated into a pool. That pool is then monetized, either through the operator's own secondary payloads or by leasing access to other threat actors. In our case, whoever bought or leased access to our endpoint pushed Kinsing and XMRig.</p>
+                            <p>This is consistent with what we observed in the forensic extraction. RondoDox was present but had not established standard persistence paths. Kinsing, on the other hand, had full persistence via a root crontab running a fileless dropper every minute, a backup binary, and a lock file. Kinsing looked like it owned the machine. RondoDox looked like it was just passing through.</p>
+                            <p>The forensic artifacts, IOCs, SHA-256 hashes, and MITRE ATT&amp;CK mapping from this incident are documented in the Honeynet Research Platform section of this portfolio. Full reports are available for download there.</p>
+                            <p>The main takeaway is not just that these two malware families appeared together. It is that the infrastructure model behind their delivery is increasingly commodified. RondoDox is not just a botnet. It is a distribution mechanism for whoever pays for it.</p>
+                        </div>
+                        <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-meta">2026-03-15</div>
+                        <h3 class="post-title">Dissecting a Mirai Variant: From Honeynet Capture to Ghidra</h3>
                         <div class="post-tags">
                             <span>malware</span>
                             <span>ghidra</span>
                             <span>honeynet</span>
                         </div>
-                        <p class="excerpt">Walkthrough of capturing a Rondodox/Mirai IoT botnet variant in our honeynet deployment, extracting the binary, and performing static analysis in Ghidra to map C2 infrastructure.</p>
-                        <a class="read-more" href="#">read more &rarr;</a>
+                        <p class="post-excerpt">Walkthrough of capturing a RondoDox/Mirai IoT botnet variant in our honeynet deployment, extracting the binary, and performing static analysis in Ghidra to map C2 infrastructure.</p>
+                        <div class="post-body" style="display:none;">
+                            <p>Full writeup coming soon. This post will walk through the capture-to-analysis pipeline for the RondoDox variant observed in the agricultureintech.net honeynet, including the Ghidra 11.3.1 workflow used to identify the 9-layer XOR-encrypted C2 configuration.</p>
+                        </div>
+                        <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
                     </div>
 
                     <div class="post-card">
-                        <p class="post-date">2026-02-28</p>
-                        <h3>Building a Threat Intel Pipeline: MISP + OpenCTI + ELK</h3>
+                        <div class="post-meta">2026-02-28</div>
+                        <h3 class="post-title">Building a Threat Intel Pipeline: MISP + OpenCTI + ELK</h3>
                         <div class="post-tags">
                             <span>threat-intel</span>
                             <span>MISP</span>
                             <span>pipeline</span>
                         </div>
-                        <p class="excerpt">How I connected MISP, OpenCTI, and ELK Stack into a unified threat intelligence pipeline, from raw honeypot data to actionable indicators shared via STIX/TAXII.</p>
-                        <a class="read-more" href="#">read more &rarr;</a>
+                        <p class="post-excerpt">How I connected MISP, OpenCTI, and ELK Stack into a unified threat intelligence pipeline, from raw honeypot data to actionable indicators shared via STIX/TAXII.</p>
+                        <div class="post-body" style="display:none;">
+                            <p>Full writeup coming soon. This post will document the pipeline architecture, the migration from containerized OpenCTI to a standalone Debian systemd deployment, and the lessons learned connecting Security Onion event streams to MISP via Logstash.</p>
+                        </div>
+                        <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
                     </div>
 
                     <div class="post-card">
-                        <p class="post-date">2026-01-10</p>
-                        <h3>Kinsing Crypto Miner: Catching a Live One</h3>
+                        <div class="post-meta">2026-01-10</div>
+                        <h3 class="post-title">Kinsing Crypto Miner: Catching a Live One</h3>
                         <div class="post-tags">
                             <span>crypto-miner</span>
                             <span>analysis</span>
                             <span>detection</span>
                         </div>
-                        <p class="excerpt">Breakdown of the Kinsing crypto miner infection chain captured in the lab, from initial exploit to persistence mechanisms and network indicators.</p>
-                        <a class="read-more" href="#">read more &rarr;</a>
+                        <p class="post-excerpt">Breakdown of the Kinsing crypto miner infection chain captured in the lab, from initial exploit to persistence mechanisms and network indicators.</p>
+                        <div class="post-body" style="display:none;">
+                            <p>Full writeup coming soon. This post will cover the Kinsing binary analysis (5.9MB Go binary, 3,826 functions), the XMRig miner deployment at kdevtmpfsi running 401% CPU, and the libsystem.so rootkit via /etc/ld.so.preload.</p>
+                        </div>
+                        <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
                     </div>
 
                     <div class="post-card">
-                        <p class="post-date">2025-12-20</p>
-                        <h3>Home Lab v3: Network Segmentation with pfSense</h3>
+                        <div class="post-meta">2025-12-20</div>
+                        <h3 class="post-title">Home Lab v3: Network Segmentation with pfSense</h3>
                         <div class="post-tags">
                             <span>homelab</span>
                             <span>pfSense</span>
                             <span>networking</span>
                         </div>
-                        <p class="excerpt">Latest iteration of the home lab network architecture. VLANs, firewall rules, and isolated zones for safe malware detonation and ongoing research.</p>
-                        <a class="read-more" href="#">read more &rarr;</a>
+                        <p class="post-excerpt">Latest iteration of the home lab network architecture. VLANs, firewall rules, and isolated zones for safe malware detonation and ongoing research.</p>
+                        <div class="post-body" style="display:none;">
+                            <p>Full writeup coming soon. This post will document the VLAN layout on the Ubiquiti UniFi US-8-60W, the pfSense firewall rules segmenting the honeynet from the production network, and the sandbox environment used for static and dynamic malware analysis.</p>
+                        </div>
+                        <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
                     </div>
                 </div>
 
@@ -99,49 +136,64 @@
                     <h2>&gt; Threat Watch_</h2>
                     <p class="column-desc">Current events in cybersecurity, summarized and posted as they happen. Threat intel, malware campaigns, supply chain attacks, new CVEs, AI security, anything worth paying attention to. Updated every two to five days via automated Cowork pipeline.</p>
 
-                    <div class="automation-note">
-                        [ Cowork automation pipeline, to be configured. Posts will appear here automatically once connected. ]
+                    <div class="post-card">
+                        <div class="post-meta">2026-04-05</div>
+                        <h3 class="post-title">CVE-2024-3400: PAN-OS Command Injection, Patch Now</h3>
+                        <div class="post-tags">
+                            <span>CVE</span>
+                            <span>critical</span>
+                            <span>Palo Alto</span>
+                        </div>
+                        <p class="post-excerpt">Critical command injection vulnerability in Palo Alto Networks PAN-OS GlobalProtect gateway. Active exploitation confirmed. CVSS 10.0.</p>
+                        <div class="post-body" style="display:none;">
+                            <p>A critical unauthenticated command injection vulnerability in the PAN-OS GlobalProtect gateway feature is under active exploitation. The bug, tracked as CVE-2024-3400, allows remote attackers to execute arbitrary commands as root on affected firewalls. Palo Alto Networks has released hotfixes across all maintained PAN-OS 10.2, 11.0, and 11.1 branches. Any organization exposing GlobalProtect portals should patch immediately.</p>
+                        </div>
+                        <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
                     </div>
 
-                    <!-- FIRST REAL POST -->
-                    <div class="post-card" style="margin-top: 1.5rem;">
-                        <p class="post-date">April 10, 2026</p>
-                        <h3>Was My Honeypot Part of a Loader-as-a-Service Operation?</h3>
+                    <div class="post-card">
+                        <div class="post-meta">2026-04-01</div>
+                        <h3 class="post-title">APT29 Targets Energy Sector with Spear-Phishing Campaign</h3>
                         <div class="post-tags">
-                            <span>Threat Intel</span>
-                            <span>Malware</span>
-                            <span>RondoDox</span>
-                            <span>Kinsing</span>
-                            <span>Botnet</span>
+                            <span>APT</span>
+                            <span>energy</span>
+                            <span>CISA</span>
                         </div>
-                        <p class="excerpt">When RondoDox hit our honeypot and Kinsing followed six hours later from a different C2, I had a theory. Turns out the research backs it up.</p>
-                        <a class="read-more" href="javascript:void(0);" onclick="toggleBlogPost('laas')">read more &rarr;</a>
-                        <div class="post-content" id="post-laas">
-                            <p>
-                                When our honeypot at agricultureintech.net went live, it took less than six hours to receive its first malware. RondoDox came in first, established persistence, and went quiet. Then approximately six hours later, a separate C2 server delivered Kinsing along with an XMRig miner that immediately began consuming 401% CPU mining Monero.
-                            </p>
-                            <p>
-                                At the time, the working theory among the team was that this might be a turf war between competing malware operators. That is a documented phenomenon. But something about the timing felt too clean. RondoDox came in like a scout. Kinsing came in like a payload.
-                            </p>
-                            <p>
-                                The theory I kept coming back to was this: RondoDox did not just infect us. It processed us. It added our endpoint to a pool of compromised machines, and that pool was sold or leased to a Kinsing operator who then pushed their payload to the entire batch. We were not a target. We were inventory.
-                            </p>
-                            <p>
-                                As it turns out, the research supports this. CloudSEK documented a large-scale Loader-as-a-Service botnet distributing RondoDox, Mirai, and Morte payloads, with a 230% attack spike in mid-2025. Trend Micro's analysis confirmed that RondoDox broadened its distribution using a loader-as-a-service infrastructure that co-packages payloads and delivers them to compromised endpoint pools. FortiGuard observed the same hybrid infrastructure.
-                            </p>
-                            <p>
-                                The operational picture is straightforward. RondoDox is the acquisition layer. It uses an exploit shotgun approach, firing dozens of known CVEs at internet-exposed infrastructure until something lands. Once it gets in, it establishes persistence and checks in. The infected endpoint gets aggregated into a pool. That pool is then monetized, either through the operator's own secondary payloads or by leasing access to other threat actors. In our case, whoever bought or leased access to our endpoint pushed Kinsing and XMRig.
-                            </p>
-                            <p>
-                                This is consistent with what we observed in the forensic extraction. RondoDox was present but had not established standard persistence paths. Kinsing, on the other hand, had full persistence via a root crontab running a fileless dropper every minute, a backup binary, and a lock file. Kinsing looked like it owned the machine. RondoDox looked like it was just passing through.
-                            </p>
-                            <p>
-                                The forensic artifacts, IOCs, SHA-256 hashes, and MITRE ATT&amp;CK mapping from this incident are documented in the Honeynet Research Platform section of this portfolio. Full reports are available for download there.
-                            </p>
-                            <p>
-                                The main takeaway is not just that these two malware families appeared together. It is that the infrastructure model behind their delivery is increasingly commodified. RondoDox is not just a botnet. It is a distribution mechanism for whoever pays for it.
-                            </p>
+                        <p class="post-excerpt">CISA advisory warns of renewed APT29 activity targeting U.S. energy infrastructure with sophisticated spear-phishing lures impersonating regulatory bodies.</p>
+                        <div class="post-body" style="display:none;">
+                            <p>CISA released a joint advisory detailing new APT29 tradecraft observed against U.S. energy sector targets. The campaign uses spear-phishing lures impersonating NERC and FERC, delivers credential harvesters via OneDrive links, and pivots to long-dwell cloud persistence using service principal abuse. Recommended mitigations include conditional access policies, hardware-backed MFA for privileged accounts, and increased monitoring of OAuth grant activity.</p>
                         </div>
+                        <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-meta">2026-03-25</div>
+                        <h3 class="post-title">Ivanti Connect Secure Auth Bypass Under Active Exploitation</h3>
+                        <div class="post-tags">
+                            <span>CVE</span>
+                            <span>VPN</span>
+                            <span>exploit</span>
+                        </div>
+                        <p class="post-excerpt">CVE-2024-21887 authentication bypass in Ivanti Connect Secure being actively exploited in the wild. Chained with SSRF for remote code execution.</p>
+                        <div class="post-body" style="display:none;">
+                            <p>Ivanti Connect Secure and Policy Secure gateways are under active exploitation via CVE-2024-21887 chained with CVE-2023-46805. The combination enables unauthenticated remote code execution through a server-side request forgery and command injection chain. Mandiant has attributed early exploitation to a suspected China-nexus actor. Emergency patches and the official mitigation XML should be applied immediately.</p>
+                        </div>
+                        <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-meta">2026-03-18</div>
+                        <h3 class="post-title">New Kinsing Campaign Targets Misconfigured Docker Hosts</h3>
+                        <div class="post-tags">
+                            <span>malware</span>
+                            <span>crypto</span>
+                            <span>Docker</span>
+                        </div>
+                        <p class="post-excerpt">Updated Kinsing variant scanning for exposed Docker API endpoints. Deploys XMRig miner and establishes persistence via cron jobs and rootkit modules.</p>
+                        <div class="post-body" style="display:none;">
+                            <p>A new Kinsing campaign is actively scanning the internet for exposed Docker API endpoints on port 2375. On successful access, the operator deploys the standard XMRig Monero miner, installs a libsystem.so rootkit via /etc/ld.so.preload, and establishes persistence through a root crontab running a fileless dropper. The TTPs match the binary captured in our honeynet, suggesting shared infrastructure or a forked operator.</p>
+                        </div>
+                        <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
                     </div>
                 </div>
             </div>

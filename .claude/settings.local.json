@@ -8,7 +8,26 @@
       "Bash(git branch:*)",
       "Bash(git remote:*)",
       "Bash(git push:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(python -m pip install defusedxml --quiet)",
+      "Bash(python scripts/office/unpack.py /c/Claude/Projects/packetpursuit-site/assets/Honeynet_Capstone_Presentation_v2.pptx /tmp/honeynet-unpacked/)",
+      "Read(//tmp/honeynet-unpacked/ppt/**)",
+      "Bash(python -m markitdown /c/Claude/Projects/packetpursuit-site/assets/Honeynet_Capstone_Presentation_v2.pptx)",
+      "Bash(python -m pip install \"markitdown[pptx]\" --quiet)",
+      "Bash(cygpath -w /tmp/honeynet-unpacked/ppt/slides/slide2.xml)",
+      "Bash(python scripts/clean.py /tmp/honeynet-unpacked/)",
+      "Bash(python scripts/office/pack.py /tmp/honeynet-unpacked/ /c/Claude/Projects/packetpursuit-site/assets/Honeynet_Capstone_Presentation_v2.pptx --original /c/Claude/Projects/packetpursuit-site/assets/Honeynet_Capstone_Presentation.pptx)",
+      "Bash(ls -lh /c/Claude/Projects/packetpursuit-site/assets/Honeynet_Capstone_Presentation*.pptx)",
+      "Bash(cp \"HomeLab.png\" homelab-photo.png)",
+      "Bash(cp \"HomeLabTopology.png\" homelab-topology.png)",
+      "Bash(cp \"Cover-Letter.pdf\" coverletter.pdf)",
+      "Bash(cp \"Resume.pdf\" resume.pdf)",
+      "Bash(cp \"24 hour threat map.png\" screenshots/threat-map.png)",
+      "Bash(cp \"ELK alerts total.png\" screenshots/elk-alerts.png)",
+      "Bash(cp \"Malware Alerts ELK.png\" screenshots/malware-detection-alerts.png)",
+      "Bash(cp \"Terminal 1.png\" screenshots/terminal-kinsing.png)",
+      "Bash(cp \"Initail Alerts details.png\" screenshots/alert-details.png)",
+      "Bash(ls *.pdf *.png)"
     ]
   }
 }

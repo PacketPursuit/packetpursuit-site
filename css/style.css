@@ -822,16 +822,21 @@ nav ul a.active {
     transform: translateY(-2px);
 }
 
-.post-card .post-date {
+.post-card .post-date,
+.post-card .post-meta {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--text-secondary);
     margin-bottom: 0.5rem;
 }
 
-.post-card h3 {
+.post-card h3,
+.post-card .post-title {
+    font-family: var(--font-mono);
     font-size: 1.1rem;
+    color: var(--text);
     margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
 }
 
 .post-card .post-tags {
@@ -849,16 +854,41 @@ nav ul a.active {
     color: var(--accent);
 }
 
-.post-card .excerpt {
+.post-card .excerpt,
+.post-card .post-excerpt {
     color: var(--text-secondary);
     font-size: 0.85rem;
     line-height: 1.6;
     margin-bottom: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-card .post-body {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+}
+
+.post-card .post-body p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-bottom: 0.85rem;
+}
+
+.post-card .post-body p:last-child {
+    margin-bottom: 0;
 }
 
 .post-card .read-more {
+    display: inline-block;
+    margin-top: 0.25rem;
     font-family: var(--font-mono);
     font-size: 0.8rem;
+    cursor: pointer;
 }
 
 .automation-note {

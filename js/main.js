@@ -183,13 +183,13 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
 });
 
-// ===== BLOG POST TOGGLE =====
-function toggleBlogPost(id) {
-    const content = document.getElementById('post-' + id);
-    if (!content) return;
-    content.classList.toggle('open');
-    const link = content.previousElementSibling;
-    if (link && link.classList.contains('read-more')) {
-        link.textContent = content.classList.contains('open') ? 'collapse ↑' : 'read more →';
-    }
+// ===== BLOG POST TOGGLE (read more / collapse) =====
+function togglePost(link) {
+    const card = link.closest('.post-card');
+    if (!card) return;
+    const body = card.querySelector('.post-body');
+    if (!body) return;
+    const isHidden = body.style.display === 'none' || body.style.display === '';
+    body.style.display = isHidden ? 'block' : 'none';
+    link.textContent = isHidden ? 'collapse ↑' : 'read more →';
 }
