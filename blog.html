@@ -102,16 +102,36 @@
                     </div>
 
                     <div class="post-card">
-                        <div class="post-meta">2026-01-10</div>
+                        <div class="post-meta">January 10, 2026</div>
                         <h3 class="post-title">Kinsing Crypto Miner: Catching a Live One</h3>
                         <div class="post-tags">
-                            <span>crypto-miner</span>
-                            <span>analysis</span>
-                            <span>detection</span>
+                            <span>Malware</span>
+                            <span>Crypto Miner</span>
+                            <span>Incident Response</span>
+                            <span>Ghidra</span>
+                            <span>Honeynet</span>
                         </div>
-                        <p class="post-excerpt">Breakdown of the Kinsing crypto miner infection chain captured in the lab, from initial exploit to persistence mechanisms and network indicators.</p>
+                        <p class="post-excerpt">The first indicator wasn't one thing. It was a cascade of alerts, invisible files, and a file manager that contradicted everything the terminal was telling me.</p>
                         <div class="post-body" style="display:none;">
-                            <p>Full writeup coming soon. This post will cover the Kinsing binary analysis (5.9MB Go binary, 3,826 functions), the XMRig miner deployment at kdevtmpfsi running 401% CPU, and the libsystem.so rootkit via /etc/ld.so.preload.</p>
+                            <p>I want to write this one for people who are newer to this and have never stared at a live infection before and wondered what they were actually looking at. The first time is disorienting in a way that no lab exercise prepares you for.</p>
+
+                            <p>We had deployed a deliberately vulnerable environment at agricultureintech.net, an Apache web server with an outdated ActiveMQ instance sitting on port 61616, CVE-2023-46604 wide open. I knew it was only a matter of time. Before we went live I had built Elastic detection rules specifically tuned to that service, so when the compromise happened the alerts fired immediately. Good news. Understanding what had actually landed took considerably longer.</p>
+
+                            <p>The initial alerts were noisy in the right way: file modification events, process spawning from unusual parents, outbound connections to addresses we had no business talking to. I started working through it the normal way. Checked <code>/etc/data/</code> where the payload had been dropped. Ran <code>ls -la</code>. Could see <code>libsystem.so</code> sitting there but nothing else. Ran <code>stat</code> on the directory. Normal. Ran <code>top</code> to look for suspicious processes. Got killed mid-output. Tried <code>htop</code>. Same. Every time I tried to get eyes on what was consuming resources or sitting in that directory, something was actively interfering.</p>
+
+                            <p>This was my first real encounter with a rootkit operating in front of me in real time and I did not immediately recognize it for what it was.</p>
+
+                            <p>A few weeks before this event I had installed a GUI on our headless Ubuntu server for team members who were less comfortable working purely in the terminal. In what turned out to be a lucky call, I opened the file manager and navigated to <code>/etc/data/</code>. Kinsing was right there. Full binary, plain as day, 5.9 megabytes sitting in a non-standard directory with world-executable permissions. The same directory where <code>ls</code> was showing me nothing.</p>
+
+                            <p>That mismatch is when it clicked. The rootkit was hooking library calls to hide itself from command-line tools while remaining visible to anything that accessed the filesystem through a different path. A quick check of <code>/etc/ld.so.preload</code> confirmed it: <code>libsystem.so</code> was loaded there, intercepting standard library calls and filtering out any results related to the Kinsing process and files.</p>
+
+                            <p>Secondary indicators we documented alongside this: consistent beaconing on port 31190 to a C2 server, XMRig miner running as <code>kdevtmpfsi</code> consuming over 400% CPU across four cores, connecting to a mining pool at <code>185.221.152.130:443</code> over HTTPS to blend with legitimate traffic, and a root crontab executing a fileless dropper every single minute by piping a remote shell script directly to bash. No file on disk. Invisible to file-based scanning.</p>
+
+                            <p>From there the team spent about a week documenting everything, extracting the binaries safely, and working through the analysis. I used Ghidra for static analysis on the RondoDox binary, which was the more reversible of the two: statically linked, stripped, but fully decompilable. Kinsing was a 5.9MB Go binary with 3,826 functions and considerably more surface area to work through.</p>
+
+                            <p>Here is the part worth sharing honestly: what took me and the team a week, a Claude Code agent running Ghidra via Computer Use on our malware analysis box did in about two hours. Full function map, C2 infrastructure, persistence mechanisms, rootkit behavior, MITRE ATT&amp;CK mapping. It caught everything I caught and a few things I had missed. That is not a comfortable thing to admit but it is true and it is useful. The manual work built the intuition. The agent built the report. Both have their place.</p>
+
+                            <p>Full technical documentation including SHA-256 hashes, IOCs, C2 addresses, and the complete MITRE ATT&amp;CK mapping from this incident is in the Honeynet Research Platform section of this portfolio.</p>
                         </div>
                         <a href="#" class="read-more" onclick="togglePost(this); return false;">read more &rarr;</a>
                     </div>
