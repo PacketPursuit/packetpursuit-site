@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | PacketPursuit — Jacob Wills</title>
-    <meta name="description" content="Cybersecurity projects — honeynet research, malware analysis, home lab, CTF writeups.">
+    <title>Projects | PacketPursuit, Jacob Wills</title>
+    <meta name="description" content="Cybersecurity projects. Honeynet research, malware analysis, home lab, CTF writeups.">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -40,25 +40,45 @@
         <div class="container">
             <div class="projects-grid">
 
-                <!-- FEATURED: Honeynet -->
+                <!-- FEATURED: Honeynet Capstone -->
                 <div class="project-card featured fade-in">
                     <span class="featured-tag">Featured</span>
-                    <h3>Honeynet &amp; Threat Intelligence Platform</h3>
+                    <h3>Honeynet Research Platform, Academic Capstone</h3>
                     <div class="project-tags">
-                        <span>T-Pot</span>
+                        <span>Apache Guacamole</span>
+                        <span>Active Directory</span>
                         <span>ELK Stack</span>
+                        <span>Security Onion</span>
                         <span>MISP</span>
                         <span>OpenCTI</span>
-                        <span>Suricata</span>
                         <span>Ghidra</span>
-                        <span>Python</span>
+                        <span>Palo Alto</span>
+                        <span>Juniper</span>
                     </div>
                     <p>
-                        Deployed a multi-honeypot platform (T-Pot) to capture live attack traffic and malware samples. Built a full threat intelligence pipeline feeding into MISP and OpenCTI. Captured and analyzed a Rondodox/Mirai IoT botnet variant and Kinsing crypto miner using Ghidra for static binary analysis. Correlated attack data with STIX/TAXII feeds and produced actionable intelligence reports.
+                        From-scratch honeynet deployment built to simulate a vulnerable agricultural IoT startup. Captured live malware within hours of going live. Full detection stack, real adversary behavior, real lessons learned.
                     </p>
                     <div class="project-detail" id="detail-honeynet">
                         <p>
-                            The honeynet runs on dedicated Dell PowerEdge hardware in my home lab, isolated behind pfSense firewall rules. Attack data flows through Logstash into Elasticsearch, with Kibana dashboards providing real-time visibility. Suricata IDS alerts are correlated with honeypot logs to identify attack campaigns. Malware samples are automatically extracted, hashed, and submitted to VirusTotal for enrichment before manual analysis in Ghidra. The MISP instance shares indicators with the broader threat intel community via STIX/TAXII.
+                            This was not a script or a template deployment. This project was built entirely from the ground up as part of my capstone at Pima Community College, and it required planning and execution across every layer of the stack.
+                        </p>
+                        <p>
+                            The concept: simulate a small agricultural IoT startup that appeared to have accidentally exposed pre-launch infrastructure. A full company identity was created including a public-facing website (agricultureintech.net), six employee personas, and a convincing web presence targeting an underserved and high-value attack surface for nation-state actors.
+                        </p>
+                        <p>
+                            The front end consisted of an Apache web server with TLS/SSL configured, proper DNS and CNAME records, and Apache Guacamole running on Tomcat as a deceptive RDP portal. The back end ran a Windows Server 2019 domain controller with two Windows 11 workstations. Credentials were seeded from known breach data and common wordlists including RockYou to make the environment appear legitimately misconfigured.
+                        </p>
+                        <p>
+                            Multiple CVEs were researched and selected for deployment, targeting the past two years of disclosed vulnerabilities. The final selections included an older ActiveMQ instance with a known RCE vulnerability alongside Jenkins and Metabase. The environment was live and receiving malware within six hours.
+                        </p>
+                        <p>
+                            The initial architecture containerized everything including Elasticsearch, Kibana, Logstash, OpenCTI, MISP, and Arkime in separate containers managed through Portainer. This introduced cascading stability issues. After troubleshooting, the decision was made to migrate to Security Onion as the primary SIEM and detection platform, with OpenCTI running in a standalone Debian VM on systemd rather than containerized. This was the right call and one of the key lessons learned from the project.
+                        </p>
+                        <p>
+                            Hardware: Dell PowerEdge R6515, Palo Alto PA-3410 firewall, Juniper EX4300 switch.
+                        </p>
+                        <p>
+                            The project produced documented TTPs from real adversary behavior, malware samples submitted for analysis, and a formal research paper comparing observed techniques to known threat actor playbooks.
                         </p>
                     </div>
                     <div class="project-links">
@@ -73,17 +93,20 @@
                     <div class="project-tags">
                         <span>Dell PowerEdge</span>
                         <span>pfSense</span>
+                        <span>UniFi</span>
                         <span>Proxmox</span>
                         <span>Docker</span>
                         <span>ELK</span>
-                        <span>Wazuh</span>
                     </div>
                     <p>
-                        Enterprise-grade home lab built on Dell PowerEdge servers running Proxmox virtualization. Segmented network with pfSense firewalls, VLANs for isolated attack/defense zones, and a full ELK + Wazuh monitoring stack. Serves as the foundation for all research, testing, and training.
+                        Enterprise-grade home lab built on Dell PowerEdge servers running Proxmox virtualization. Segmented network with pfSense firewalls and an ELK monitoring stack. Switching handled by a Ubiquiti UniFi 8-port managed switch with VLANs configured for network segmentation. Serves as the foundation for all research, testing, and training.
                     </p>
                     <div class="project-detail" id="detail-homelab">
                         <p>
-                            Infrastructure includes multiple VMs for red/blue team exercises, a dedicated malware analysis sandbox, Active Directory lab environment, and containerized services via Docker. Network monitoring covers all segments with Zeek and Suricata. Regular vulnerability scanning with OpenVAS. All configurations managed as code for reproducibility.
+                            Infrastructure includes multiple VMs for project testing, sandbox environments, and ongoing research, a dedicated malware analysis sandbox, Active Directory lab environment, and containerized services via Docker. Network monitoring covers all segments with Zeek and Suricata. Regular vulnerability scanning with OpenVAS. All configurations managed as code for reproducibility.
+                        </p>
+                        <p style="color: var(--text-secondary); font-style: italic; font-family: var(--font-mono); font-size: 0.8rem;">
+                            [ Home lab topology diagram, to be added ]
                         </p>
                     </div>
                     <div class="project-links">
@@ -101,11 +124,14 @@
                         <span>MITRE ATT&CK</span>
                     </div>
                     <p>
-                        Analyzed real-world business email compromise (BEC) and spear-phishing campaigns. Performed header analysis, sender reputation checks, URL/domain investigation, and payload extraction. Mapped tactics to MITRE ATT&CK framework and produced incident reports.
+                        Analyzed real-world business email compromise (BEC) and spear-phishing campaigns. Performed header analysis, sender reputation checks, URL/domain investigation, and payload extraction. Mapped tactics to MITRE ATT&amp;CK framework and produced incident reports.
                     </p>
                     <div class="project-detail" id="detail-phishing">
                         <p>
                             Developed Python scripts for automated header parsing and IOC extraction. Created detection rules for common BEC patterns. Documented social engineering techniques observed in the wild and built awareness training materials based on findings.
+                        </p>
+                        <p style="color: var(--text-secondary); font-style: italic; font-family: var(--font-mono); font-size: 0.8rem;">
+                            [ Google Slides presentation embedded here, link to be added ]
                         </p>
                     </div>
                     <div class="project-links">
@@ -115,15 +141,15 @@
 
                 <!-- NCWF -->
                 <div class="project-card fade-in">
-                    <h3>NCWF CTF &amp; Cyber Dives</h3>
+                    <h3>National Cyber Warfare Foundation, Volunteer</h3>
                     <div class="project-tags">
                         <span>CTF</span>
                         <span>Blue Team</span>
-                        <span>Incident Response</span>
-                        <span>NCWF AZ03</span>
+                        <span>Community Talks</span>
+                        <span>AZ03 Range</span>
                     </div>
                     <p>
-                        Badged volunteer at the National Cyber Workforce Framework AZ03 cyber range. Participate in and help facilitate Capture the Flag competitions, defensive exercises, and cyber dive training events for students and professionals.
+                        Badged volunteer at the National Cyber Warfare Foundation AZ03 cyber range in Tucson. Help facilitate Capture the Flag events and community talks on emerging threats and techniques.
                     </p>
                     <div class="project-detail" id="detail-ncwf">
                         <p>
@@ -145,7 +171,7 @@
                         <span>CI/CD</span>
                     </div>
                     <p>
-                        This portfolio site — built from scratch with a terminal-inspired dark theme. Features a Claude-powered chatbot, automated threat intel feeds, and auto-deploys from GitHub to Cloudflare Pages on every push to main.
+                        This portfolio site, built from scratch with a terminal-inspired dark theme. Features a Claude-powered chatbot, automated threat intel feeds, and auto-deploys from GitHub to Cloudflare Pages on every push to main.
                     </p>
                     <div class="project-detail" id="detail-site">
                         <p>
@@ -172,7 +198,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 PacketPursuit | Jacob Wills | recon | exploit &amp;&amp; defend | repeat &gt;&gt; theGrind.log</p>
+        <p>&copy; 2026 PacketPursuit | Jacob Wills | recon | exploit &amp;&amp; defend | repeat &gt;&gt; theGrind.log</p>
     </footer>
 
     <script src="js/main.js"></script>

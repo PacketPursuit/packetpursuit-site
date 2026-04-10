@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | PacketPursuit — Jacob Wills</title>
-    <meta name="description" content="About Jacob Wills — veteran, former law enforcement, cybersecurity researcher.">
+    <title>About | PacketPursuit, Jacob Wills</title>
+    <meta name="description" content="About Jacob Wills. Veteran, former law enforcement, cybersecurity researcher.">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -41,9 +41,12 @@
             <div class="about-grid">
                 <!-- Sidebar -->
                 <div class="about-sidebar fade-in">
-                    <div class="photo-placeholder">[ photo ]</div>
+                    <div class="photo-placeholder">
+                        <img id="profile-photo" src="assets/profile.jpg" alt="Jacob Wills" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <span style="display:block;">[ photo, upload yours ]</span>
+                    </div>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/in/jacobwills" target="_blank" rel="noopener">&gt; LinkedIn</a>
+                        <a href="https://linkedin.com/in/jacobwills" target="_blank" rel="noopener">&gt; LinkedIn</a>
                         <a href="https://github.com/PacketPursuit" target="_blank" rel="noopener">&gt; GitHub</a>
                         <a href="mailto:jake@packetpursuit.net">&gt; jake@packetpursuit.net</a>
                     </div>
@@ -58,16 +61,22 @@
                 <div class="about-content fade-in">
                     <h2>Mission Background</h2>
                     <p>
-                        I'm Jacob Wills — a combat veteran with three tours of duty, a former Tucson Police Department officer and Field Training Officer, and now a cybersecurity student and researcher at Pima Community College. My career has always centered on one thing: protecting people and critical systems under pressure.
+                        I came to cybersecurity the way most good things happen, not all at once, but through a series of decisions that, looking back, were always pointing the same direction.
                     </p>
                     <p>
-                        After years of service in both military and law enforcement, I transitioned into cybersecurity — bringing with me the discipline, situational awareness, and threat assessment skills that only come from operating in high-stakes environments. I approach digital threats with the same methodical intensity I brought to every mission.
+                        I spent over a decade in high-pressure operational environments, first as a combat veteran and then as a police officer and field training officer with the Tucson Police Department. That career was built on reading situations fast, protecting people under pressure, and making sound calls with incomplete information. Skills that translate better to this field than most people expect.
                     </p>
                     <p>
-                        Currently, I lead honeynet research capturing live malware (including a Rondodox/Mirai variant and Kinsing crypto miner), perform binary analysis with Ghidra, and build threat intelligence pipelines using ELK, MISP, and OpenCTI. I maintain a home lab running Dell PowerEdge servers, pfSense firewalls, and a full security monitoring stack. I'm a badged volunteer at the National Cyber Workforce Framework (NCWF) AZ03 cyber range, contributing to CTF events and defensive exercises.
+                        The decision to make the switch wasn't hard. When my daughter was on the way, I knew I wanted something more stable, something with a ceiling worth chasing, and something I could actually build a future around. The GI Bill made it possible. And honestly, it was never that far a leap. My dad has been in IT since the mid-80s. My grandfather worked in telecommunications in a central office back when switching was still mechanical. You could argue I was always going to end up here.
                     </p>
                     <p>
-                        I'm currently a leading candidate for a SOC Analyst position at TEP/UNS Energy, where I'll bring my unique combination of combat-tested leadership and technical cybersecurity skills to protect critical energy infrastructure.
+                        Since making the transition I have thrown myself into the technical side of this work. I run a home lab environment on enterprise-grade hardware, study adversary behavior through active honeynet deployments, perform malware analysis using static and dynamic techniques, and build out detection and monitoring infrastructure using open-source tooling. I am currently a student at Pima Community College pursuing my Associate in Cybersecurity, with plans to continue into a Bachelor of Applied Science in Cyber Operations at the University of Arizona.
+                    </p>
+                    <p>
+                        I am also a badged volunteer at the National Cyber Warfare Foundation AZ03 cyber range in Tucson, where I help facilitate Capture the Flag events and community talks on emerging threats and techniques.
+                    </p>
+                    <p>
+                        The work is the point. Everything else follows from that.
                     </p>
 
                     <!-- Skills -->
@@ -81,7 +90,7 @@
                                     <li>Splunk</li>
                                     <li>Zeek</li>
                                     <li>Suricata</li>
-                                    <li>Wazuh</li>
+                                    <li>Security Onion</li>
                                 </ul>
                             </div>
                             <div class="skill-category">
@@ -99,7 +108,7 @@
                                 <ul>
                                     <li>pfSense</li>
                                     <li>Wireshark</li>
-                                    <li>Nmap</li>
+                                    <li>Arkime</li>
                                     <li>Snort</li>
                                     <li>Firewall Mgmt</li>
                                 </ul>
@@ -142,20 +151,12 @@
                         <h2>Certifications</h2>
                         <div class="certs-grid">
                             <div class="cert-item">
+                                Red Hat Certified System Administrator II
+                                <span class="cert-org">Red Hat (RHCSA II)</span>
+                            </div>
+                            <div class="cert-item">
                                 CompTIA Security+
-                                <span class="cert-org">CompTIA</span>
-                            </div>
-                            <div class="cert-item">
-                                CompTIA Network+
-                                <span class="cert-org">CompTIA</span>
-                            </div>
-                            <div class="cert-item">
-                                CompTIA A+
-                                <span class="cert-org">CompTIA</span>
-                            </div>
-                            <div class="cert-item">
-                                Google Cybersecurity
-                                <span class="cert-org">Google</span>
+                                <span class="cert-org">CompTIA (In Progress)</span>
                             </div>
                         </div>
                     </div>
@@ -166,7 +167,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 PacketPursuit | Jacob Wills | recon | exploit &amp;&amp; defend | repeat &gt;&gt; theGrind.log</p>
+        <p>&copy; 2026 PacketPursuit | Jacob Wills | recon | exploit &amp;&amp; defend | repeat &gt;&gt; theGrind.log</p>
     </footer>
 
     <script src="js/main.js"></script>
