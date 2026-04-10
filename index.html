@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PacketPursuit | Jacob Wills — Cybersecurity Portfolio</title>
+    <meta name="description" content="Cybersecurity portfolio of Jacob Wills — veteran, threat researcher, SOC analyst candidate.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Nav -->
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo-link">
+                <img src="assets/favicon.svg" alt="PP">
+                <span class="logo-text">PACKET<span>PURSUIT</span></span>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-terminal">
+                <div class="terminal-dots">
+                    <span class="dot-red"></span>
+                    <span class="dot-yellow"></span>
+                    <span class="dot-green"></span>
+                </div>
+                <div class="hero-prompt"><span>~/packetpursuit $</span> whoami</div>
+                <h1 class="hero-name">
+                    <span id="typed-name"></span><span class="cursor"></span>
+                </h1>
+                <p class="hero-tagline" id="hero-tagline">Cybersecurity Researcher &bull; Veteran &bull; Threat Hunter</p>
+                <p class="hero-bio" id="hero-bio">
+                    Combat veteran turned cybersecurity professional with a mission-first approach to defending digital infrastructure. Currently building threat intelligence platforms, hunting malware in honeynet deployments, and pursuing SOC analyst opportunities in critical infrastructure.
+                </p>
+            </div>
+
+            <!-- CTA Cards -->
+            <div class="cta-grid">
+                <div class="cta-card fade-in">
+                    <h3>&gt; Projects</h3>
+                    <p>Honeynet deployments, malware analysis, home lab infrastructure, and CTF walkthroughs.</p>
+                    <a href="projects.html">cd ./projects &rarr;</a>
+                </div>
+                <div class="cta-card fade-in">
+                    <h3>&gt; Blog</h3>
+                    <p>Field notes from the trenches — threat intel, analysis writeups, and automated feeds.</p>
+                    <a href="blog.html">cat ./blog &rarr;</a>
+                </div>
+                <div class="cta-card fade-in">
+                    <h3>&gt; Contact</h3>
+                    <p>Looking to connect? Grab my resume, send a message, or find me on LinkedIn.</p>
+                    <a href="contact.html">ping jake@ &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threat Intel Ticker -->
+    <section class="ticker-section">
+        <div class="ticker-wrap" id="ticker">
+            <div class="ticker-item"><span class="tag">[CVE-2024-3400]</span> PAN-OS GlobalProtect Command Injection — Critical</div>
+            <div class="ticker-item"><span class="tag">[THREAT]</span> Kinsing crypto miner variant detected in honeynet — Active Campaign</div>
+            <div class="ticker-item"><span class="tag">[CVE-2024-21887]</span> Ivanti Connect Secure Auth Bypass — Actively Exploited</div>
+            <div class="ticker-item"><span class="tag">[MALWARE]</span> Rondodox/Mirai variant — IoT botnet C2 traffic captured</div>
+            <div class="ticker-item"><span class="tag">[INTEL]</span> APT29 spear-phishing campaign targeting energy sector — CISA Advisory</div>
+            <div class="ticker-item"><span class="tag">[CVE-2024-3400]</span> PAN-OS GlobalProtect Command Injection — Critical</div>
+            <div class="ticker-item"><span class="tag">[THREAT]</span> Kinsing crypto miner variant detected in honeynet — Active Campaign</div>
+            <div class="ticker-item"><span class="tag">[CVE-2024-21887]</span> Ivanti Connect Secure Auth Bypass — Actively Exploited</div>
+            <div class="ticker-item"><span class="tag">[MALWARE]</span> Rondodox/Mirai variant — IoT botnet C2 traffic captured</div>
+            <div class="ticker-item"><span class="tag">[INTEL]</span> APT29 spear-phishing campaign targeting energy sector — CISA Advisory</div>
+        </div>
+    </section>
+
+    <!-- Chat Widget -->
+    <button class="chat-toggle" id="chatToggle" aria-label="Open chat">
+        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+    </button>
+    <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+            <h4>&gt; PacketBot_</h4>
+            <button class="chat-close" id="chatClose">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">Hey — I'm PacketBot. Ask me anything about Jake's background, projects, or how to get in touch.</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Ask PacketBot..." autocomplete="off">
+            <button id="chatSend">Send</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 PacketPursuit | Jacob Wills | recon | exploit &amp;&amp; defend | repeat &gt;&gt; theGrind.log</p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

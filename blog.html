@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | PacketPursuit — Jacob Wills</title>
+    <meta name="description" content="Cybersecurity blog — field notes, threat intel, malware analysis, and automated threat feeds.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Nav -->
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo-link">
+                <img src="assets/favicon.svg" alt="PP">
+                <span class="logo-text">PACKET<span>PURSUIT</span></span>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>&gt; Blog_</h1>
+        <p class="prompt-line"><span>~/packetpursuit $</span> tail -f ./blog/feed.log</p>
+    </div>
+
+    <!-- Blog Grid -->
+    <section>
+        <div class="container">
+            <div class="blog-grid">
+
+                <!-- Field Notes (Manual) -->
+                <div class="blog-column fade-in">
+                    <h2>&gt; Field Notes_</h2>
+                    <p class="column-desc">Organic writeups, analysis, and research — straight from the lab.</p>
+
+                    <div class="post-card">
+                        <p class="post-date">2024-12-15</p>
+                        <h3>Dissecting a Mirai Variant: From Honeynet Capture to Ghidra</h3>
+                        <div class="post-tags">
+                            <span>malware</span>
+                            <span>ghidra</span>
+                            <span>honeynet</span>
+                        </div>
+                        <p class="excerpt">Walkthrough of capturing a Rondodox/Mirai IoT botnet variant in our T-Pot deployment, extracting the binary, and performing static analysis in Ghidra to map C2 infrastructure.</p>
+                        <a class="read-more" href="#">read more &rarr;</a>
+                    </div>
+
+                    <div class="post-card">
+                        <p class="post-date">2024-11-28</p>
+                        <h3>Building a Threat Intel Pipeline: MISP + OpenCTI + ELK</h3>
+                        <div class="post-tags">
+                            <span>threat-intel</span>
+                            <span>MISP</span>
+                            <span>pipeline</span>
+                        </div>
+                        <p class="excerpt">How I connected MISP, OpenCTI, and ELK Stack into a unified threat intelligence pipeline — from raw honeypot data to actionable indicators shared via STIX/TAXII.</p>
+                        <a class="read-more" href="#">read more &rarr;</a>
+                    </div>
+
+                    <div class="post-card">
+                        <p class="post-date">2024-10-10</p>
+                        <h3>Kinsing Crypto Miner: Catching a Live One</h3>
+                        <div class="post-tags">
+                            <span>crypto-miner</span>
+                            <span>analysis</span>
+                            <span>detection</span>
+                        </div>
+                        <p class="excerpt">Breakdown of the Kinsing crypto miner infection chain captured in the lab — from initial exploit to persistence mechanisms and network indicators.</p>
+                        <a class="read-more" href="#">read more &rarr;</a>
+                    </div>
+
+                    <div class="post-card">
+                        <p class="post-date">2024-09-20</p>
+                        <h3>Home Lab v3: Network Segmentation with pfSense</h3>
+                        <div class="post-tags">
+                            <span>homelab</span>
+                            <span>pfSense</span>
+                            <span>networking</span>
+                        </div>
+                        <p class="excerpt">Latest iteration of the home lab network architecture — VLANs, firewall rules, and isolated zones for safe malware detonation and red team exercises.</p>
+                        <a class="read-more" href="#">read more &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Threat Watch (Automated) -->
+                <div class="blog-column fade-in">
+                    <h2>&gt; Threat Watch_</h2>
+                    <p class="column-desc">Automated threat intel updates — feed refreshes every 2-5 days.</p>
+
+                    <div class="post-card">
+                        <p class="post-date">2024-12-18</p>
+                        <h3>CVE-2024-3400: PAN-OS Command Injection — Patch Now</h3>
+                        <div class="post-tags">
+                            <span>CVE</span>
+                            <span>critical</span>
+                            <span>Palo Alto</span>
+                        </div>
+                        <p class="excerpt">Critical command injection vulnerability in Palo Alto Networks PAN-OS GlobalProtect gateway. Active exploitation confirmed. CVSS 10.0.</p>
+                        <a class="read-more" href="#">read more &rarr;</a>
+                    </div>
+
+                    <div class="post-card">
+                        <p class="post-date">2024-12-14</p>
+                        <h3>APT29 Targets Energy Sector with Spear-Phishing Campaign</h3>
+                        <div class="post-tags">
+                            <span>APT</span>
+                            <span>energy</span>
+                            <span>CISA</span>
+                        </div>
+                        <p class="excerpt">CISA advisory warns of renewed APT29 activity targeting U.S. energy infrastructure with sophisticated spear-phishing lures impersonating regulatory bodies.</p>
+                        <a class="read-more" href="#">read more &rarr;</a>
+                    </div>
+
+                    <div class="post-card">
+                        <p class="post-date">2024-12-10</p>
+                        <h3>Ivanti Connect Secure Auth Bypass Under Active Exploitation</h3>
+                        <div class="post-tags">
+                            <span>CVE</span>
+                            <span>VPN</span>
+                            <span>exploit</span>
+                        </div>
+                        <p class="excerpt">CVE-2024-21887 authentication bypass in Ivanti Connect Secure being actively exploited in the wild. Chained with SSRF for remote code execution.</p>
+                        <a class="read-more" href="#">read more &rarr;</a>
+                    </div>
+
+                    <div class="post-card">
+                        <p class="post-date">2024-12-05</p>
+                        <h3>New Kinsing Campaign Targets Misconfigured Docker Hosts</h3>
+                        <div class="post-tags">
+                            <span>malware</span>
+                            <span>crypto</span>
+                            <span>Docker</span>
+                        </div>
+                        <p class="excerpt">Updated Kinsing variant scanning for exposed Docker API endpoints. Deploys XMRig miner and establishes persistence via cron jobs and rootkit modules.</p>
+                        <a class="read-more" href="#">read more &rarr;</a>
+                    </div>
+
+                    <div class="automation-note">
+                        &gt; Feed powered by Cowork automation pipeline.<br>
+                        &gt; Updates every 2-5 days from curated threat intel sources.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 PacketPursuit | Jacob Wills | recon | exploit &amp;&amp; defend | repeat &gt;&gt; theGrind.log</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | PacketPursuit — Jacob Wills</title>
+    <meta name="description" content="Cybersecurity projects — honeynet research, malware analysis, home lab, CTF writeups.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Nav -->
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo-link">
+                <img src="assets/favicon.svg" alt="PP">
+                <span class="logo-text">PACKET<span>PURSUIT</span></span>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>&gt; Projects_</h1>
+        <p class="prompt-line"><span>~/packetpursuit $</span> ls -la ./projects/</p>
+    </div>
+
+    <!-- Projects -->
+    <section>
+        <div class="container">
+            <div class="projects-grid">
+
+                <!-- FEATURED: Honeynet -->
+                <div class="project-card featured fade-in">
+                    <span class="featured-tag">Featured</span>
+                    <h3>Honeynet &amp; Threat Intelligence Platform</h3>
+                    <div class="project-tags">
+                        <span>T-Pot</span>
+                        <span>ELK Stack</span>
+                        <span>MISP</span>
+                        <span>OpenCTI</span>
+                        <span>Suricata</span>
+                        <span>Ghidra</span>
+                        <span>Python</span>
+                    </div>
+                    <p>
+                        Deployed a multi-honeypot platform (T-Pot) to capture live attack traffic and malware samples. Built a full threat intelligence pipeline feeding into MISP and OpenCTI. Captured and analyzed a Rondodox/Mirai IoT botnet variant and Kinsing crypto miner using Ghidra for static binary analysis. Correlated attack data with STIX/TAXII feeds and produced actionable intelligence reports.
+                    </p>
+                    <div class="project-detail" id="detail-honeynet">
+                        <p>
+                            The honeynet runs on dedicated Dell PowerEdge hardware in my home lab, isolated behind pfSense firewall rules. Attack data flows through Logstash into Elasticsearch, with Kibana dashboards providing real-time visibility. Suricata IDS alerts are correlated with honeypot logs to identify attack campaigns. Malware samples are automatically extracted, hashed, and submitted to VirusTotal for enrichment before manual analysis in Ghidra. The MISP instance shares indicators with the broader threat intel community via STIX/TAXII.
+                        </p>
+                    </div>
+                    <div class="project-links">
+                        <button class="expand-btn" onclick="toggleDetail('honeynet')">[ details ]</button>
+                        <a href="https://github.com/PacketPursuit" target="_blank" rel="noopener">&gt; GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Home Lab -->
+                <div class="project-card fade-in">
+                    <h3>Home Lab Infrastructure</h3>
+                    <div class="project-tags">
+                        <span>Dell PowerEdge</span>
+                        <span>pfSense</span>
+                        <span>Proxmox</span>
+                        <span>Docker</span>
+                        <span>ELK</span>
+                        <span>Wazuh</span>
+                    </div>
+                    <p>
+                        Enterprise-grade home lab built on Dell PowerEdge servers running Proxmox virtualization. Segmented network with pfSense firewalls, VLANs for isolated attack/defense zones, and a full ELK + Wazuh monitoring stack. Serves as the foundation for all research, testing, and training.
+                    </p>
+                    <div class="project-detail" id="detail-homelab">
+                        <p>
+                            Infrastructure includes multiple VMs for red/blue team exercises, a dedicated malware analysis sandbox, Active Directory lab environment, and containerized services via Docker. Network monitoring covers all segments with Zeek and Suricata. Regular vulnerability scanning with OpenVAS. All configurations managed as code for reproducibility.
+                        </p>
+                    </div>
+                    <div class="project-links">
+                        <button class="expand-btn" onclick="toggleDetail('homelab')">[ details ]</button>
+                    </div>
+                </div>
+
+                <!-- Spear Phishing -->
+                <div class="project-card fade-in">
+                    <h3>Spear Phishing / BEC Analysis</h3>
+                    <div class="project-tags">
+                        <span>Email Headers</span>
+                        <span>OSINT</span>
+                        <span>Python</span>
+                        <span>MITRE ATT&CK</span>
+                    </div>
+                    <p>
+                        Analyzed real-world business email compromise (BEC) and spear-phishing campaigns. Performed header analysis, sender reputation checks, URL/domain investigation, and payload extraction. Mapped tactics to MITRE ATT&CK framework and produced incident reports.
+                    </p>
+                    <div class="project-detail" id="detail-phishing">
+                        <p>
+                            Developed Python scripts for automated header parsing and IOC extraction. Created detection rules for common BEC patterns. Documented social engineering techniques observed in the wild and built awareness training materials based on findings.
+                        </p>
+                    </div>
+                    <div class="project-links">
+                        <button class="expand-btn" onclick="toggleDetail('phishing')">[ details ]</button>
+                    </div>
+                </div>
+
+                <!-- NCWF -->
+                <div class="project-card fade-in">
+                    <h3>NCWF CTF &amp; Cyber Dives</h3>
+                    <div class="project-tags">
+                        <span>CTF</span>
+                        <span>Blue Team</span>
+                        <span>Incident Response</span>
+                        <span>NCWF AZ03</span>
+                    </div>
+                    <p>
+                        Badged volunteer at the National Cyber Workforce Framework AZ03 cyber range. Participate in and help facilitate Capture the Flag competitions, defensive exercises, and cyber dive training events for students and professionals.
+                    </p>
+                    <div class="project-detail" id="detail-ncwf">
+                        <p>
+                            Contribute to exercise design, range infrastructure setup, and mentoring participants. Focus on blue team defensive scenarios including log analysis, incident response procedures, and threat hunting. Help bridge the gap between classroom knowledge and operational skills.
+                        </p>
+                    </div>
+                    <div class="project-links">
+                        <button class="expand-btn" onclick="toggleDetail('ncwf')">[ details ]</button>
+                    </div>
+                </div>
+
+                <!-- This Site -->
+                <div class="project-card fade-in">
+                    <h3>PacketPursuit.net</h3>
+                    <div class="project-tags">
+                        <span>HTML/CSS/JS</span>
+                        <span>Cloudflare Pages</span>
+                        <span>Claude API</span>
+                        <span>CI/CD</span>
+                    </div>
+                    <p>
+                        This portfolio site — built from scratch with a terminal-inspired dark theme. Features a Claude-powered chatbot, automated threat intel feeds, and auto-deploys from GitHub to Cloudflare Pages on every push to main.
+                    </p>
+                    <div class="project-detail" id="detail-site">
+                        <p>
+                            Designed with a hacker/operator aesthetic using custom CSS animations (scanline overlay, typing effects, fade-in observers). Integrated Claude API chatbot provides visitors with information about projects and background. Blog section supports both manual writeups and automated threat intelligence posts via Cowork automation pipeline.
+                        </p>
+                    </div>
+                    <div class="project-links">
+                        <button class="expand-btn" onclick="toggleDetail('site')">[ details ]</button>
+                        <a href="https://github.com/PacketPursuit/packetpursuit-site" target="_blank" rel="noopener">&gt; Source</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTF Section -->
+            <div class="ctf-section fade-in">
+                <h2>&gt; CTF Writeups &amp; Labs_</h2>
+                <div class="ctf-placeholder">
+                    <p>&gt; HackTheBox / TryHackMe writeups coming soon...</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.8rem;">Check back for walkthroughs, flag captures, and methodology breakdowns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 PacketPursuit | Jacob Wills | recon | exploit &amp;&amp; defend | repeat &gt;&gt; theGrind.log</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
