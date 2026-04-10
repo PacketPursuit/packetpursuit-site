@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault | PacketPursuit</title>
+    <meta name="description" content="Restricted.">
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Nav -->
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo-link">
+                <img src="assets/favicon.svg" alt="PP">
+                <span class="logo-text">PACKET<span>PURSUIT</span></span>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="vault.html" class="vault-link active">Vault</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==================== LOCKED STATE ==================== -->
+    <section class="vault-locked-wrap" id="vault-locked">
+        <div class="container">
+            <div class="vault-terminal">
+                <div class="terminal-dots">
+                    <span class="dot-red"></span>
+                    <span class="dot-yellow"></span>
+                    <span class="dot-green"></span>
+                </div>
+                <div class="vault-prompt">&gt; vault.html</div>
+                <div class="vault-prompt"><span class="pp-green">~/packetpursuit $</span> cat .access_policy</div>
+
+                <pre class="vault-policy">
+  ACCESS RESTRICTED
+
+  This directory is not for everyone.
+  Find the flag. Prove you were looking.
+
+  FLAG FORMAT:  PP{...}
+
+  HINT: not all pages are what they appear.
+        look where machines aren't meant to look.
+</pre>
+
+                <form id="vault-form" class="vault-form" autocomplete="off">
+                    <label for="vault-input" class="vault-input-label"><span class="pp-green">&gt;</span></label>
+                    <input type="text" id="vault-input" name="flag" placeholder="PP{...}" spellcheck="false" autocomplete="off">
+                    <button type="submit" class="vault-enter-btn">[ enter ]</button>
+                </form>
+
+                <div class="vault-denied" id="vault-denied">
+                    &gt; ACCESS DENIED, keep looking
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== UNLOCKED STATE ==================== -->
+    <section class="vault-unlocked-wrap" id="vault-unlocked" style="display:none;">
+        <div class="container vault-container">
+
+            <!-- Header -->
+            <div class="vault-header">
+                <h1 class="vault-h1">&gt; access_granted_</h1>
+                <p class="vault-subtle"><span class="pp-green">~/packetpursuit/vault $</span> cat README.md</p>
+            </div>
+
+            <!-- whoami --real -->
+            <div class="vault-section">
+                <h2 class="vault-section-title" onclick="toggleVaultSection(this)">&gt; whoami --real</h2>
+                <div class="vault-section-body">
+                    <p>the stuff that doesn't make it onto a resume.</p>
+                    <p>combat vet. former cop. current dad.<br>
+                    perpetually tired, chronically curious.</p>
+                    <p>my office is a very specific kind of chaos,<br>
+                    challenge coins, military awards, 40K miniatures,<br>
+                    a GameCube, an original Xbox, and two bearded dragons<br>
+                    judging me from across the room.</p>
+                    <p>the little one in the toy car doing 3mph<br>
+                    while we blow bubbles is the best part of any day.<br>
+                    no contest.</p>
+
+                    <div class="vault-photo-grid">
+                        <figure class="vault-photo">
+                            <img src="assets/vault/daughter.png" alt="Family" onerror="this.parentElement.style.display='none';">
+                            <figcaption>the best part of any day</figcaption>
+                        </figure>
+                        <figure class="vault-photo">
+                            <img src="assets/vault/coins.png" alt="Challenge coins collection" onerror="this.parentElement.style.display='none';">
+                            <figcaption>challenge coin shelf</figcaption>
+                        </figure>
+                        <figure class="vault-photo">
+                            <img src="assets/vault/poker.jpg" alt="Overseas poker game" onerror="this.parentElement.style.display='none';">
+                            <figcaption>high stakes, unusual table rules</figcaption>
+                        </figure>
+                        <figure class="vault-photo">
+                            <img src="assets/vault/dog-kiaba.jpg" alt="Kiaba the dog" onerror="this.parentElement.style.display='none';">
+                            <figcaption>Kiaba, one of the crazy ones</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
+            <!-- currently_playing -->
+            <div class="vault-section">
+                <h2 class="vault-section-title" onclick="toggleVaultSection(this)">&gt; currently_playing</h2>
+                <div class="vault-section-body">
+                    <div class="vault-card-grid">
+                        <div class="vault-card">
+                            <div class="vault-card-head">
+                                <span class="vault-card-title">Grey Zone Warfare</span>
+                                <span class="vault-tag tag-active">active</span>
+                            </div>
+                            <p>the updated task system was a good call. streamlines the grind for new and returning players. still not sure where Mad Finger Games is taking this long-term. going up against Tarkov with a persistent world is an ambitious swing and the optimization still needs work, but these devs put in work and it shows. been here since v0.0.1 and not going anywhere.</p>
+                        </div>
+                        <div class="vault-card">
+                            <div class="vault-card-head">
+                                <span class="vault-card-title">Space Engineers</span>
+                                <span class="vault-tag tag-rotation">on rotation</span>
+                            </div>
+                            <p>physics sandbox sci-fi shipbuilding. build something inspired by The Expanse, watch it immediately fail structurally. repeat indefinitely.</p>
+                        </div>
+                        <div class="vault-card">
+                            <div class="vault-card-head">
+                                <span class="vault-card-title">League of Legends</span>
+                                <span class="vault-tag tag-retired">retired, season 2 vet</span>
+                            </div>
+                            <p>played since before most current players were in high school. no regrets. mostly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- currently_watching -->
+            <div class="vault-section">
+                <h2 class="vault-section-title" onclick="toggleVaultSection(this)">&gt; currently_watching</h2>
+                <div class="vault-section-body">
+                    <h3 class="vault-subhead">&gt; streaming / TV</h3>
+                    <ul class="vault-list">
+                        <li><strong>The Expanse</strong>, peak science fiction television. nothing comes close.</li>
+                        <li><strong>House of the Dragon / Game of Thrones</strong>, the good seasons are very good.</li>
+                        <li><strong>Warhammer 40K content</strong>, Blood Angels. Sanguinius. always. Salamanders as a respectful second.</li>
+                    </ul>
+
+                    <h3 class="vault-subhead">&gt; YouTube, channels worth your time</h3>
+                    <div class="vault-yt-grid">
+                        <a href="https://www.youtube.com/@_JohnHammond" target="_blank" rel="noopener" class="vault-yt-card">
+                            <div class="vault-yt-name">John Hammond</div>
+                            <p>malware analysis and CTFs from someone who genuinely knows what they're doing</p>
+                        </a>
+                        <a href="https://www.youtube.com/@Fireship" target="_blank" rel="noopener" class="vault-yt-card">
+                            <div class="vault-yt-name">Fireship</div>
+                            <p>100-second explainers that somehow make complex things land</p>
+                        </a>
+                        <a href="https://www.youtube.com/@ThePrimeTimeagen" target="_blank" rel="noopener" class="vault-yt-card">
+                            <div class="vault-yt-name">ThePrimeagen</div>
+                            <p>unhinged performance engineering opinions. usually correct</p>
+                        </a>
+                        <a href="https://www.youtube.com/@JustCallMeKoko" target="_blank" rel="noopener" class="vault-yt-card">
+                            <div class="vault-yt-name">Call Me Koko</div>
+                            <p>hardware hacking, Wi-Fi tools, war rigs. directly responsible for several purchases I do not regret</p>
+                        </a>
+                        <a href="https://www.youtube.com/@TalkingSasquach" target="_blank" rel="noopener" class="vault-yt-card">
+                            <div class="vault-yt-name">Talking Sasquatch</div>
+                            <p>homelab and cyber content worth the time</p>
+                        </a>
+                        <a href="https://www.youtube.com/@MyDFIR" target="_blank" rel="noopener" class="vault-yt-card">
+                            <div class="vault-yt-name">MyDFIR</div>
+                            <p>DFIR walkthroughs, solid fundamentals</p>
+                        </a>
+                        <a href="https://www.youtube.com/@madhatistaken" target="_blank" rel="noopener" class="vault-yt-card">
+                            <div class="vault-yt-name">madhatistaken</div>
+                            <p>security content, good follow</p>
+                        </a>
+                        <a href="https://www.youtube.com/@davidbombal" target="_blank" rel="noopener" class="vault-yt-card">
+                            <div class="vault-yt-name">David Bombal</div>
+                            <p>networking and ethical hacking deep dives</p>
+                        </a>
+                        <a href="https://www.youtube.com/@ScammerPayback" target="_blank" rel="noopener" class="vault-yt-card">
+                            <div class="vault-yt-name">Scammer Payback</div>
+                            <p>righteous chaos. watch at least one video</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- currently_listening -->
+            <div class="vault-section">
+                <h2 class="vault-section-title" onclick="toggleVaultSection(this)">&gt; currently_listening</h2>
+                <div class="vault-section-body">
+                    <p>the Deftones. always.</p>
+                    <p>and anything from that late 90s / early 2000s window<br>
+                    when rock was doing something genuinely interesting:</p>
+                    <p><strong>Tool. System of a Down. Smashing Pumpkins. Alice in Chains.</strong></p>
+                    <p>that era specifically.</p>
+                </div>
+            </div>
+
+            <!-- current_obsession -->
+            <div class="vault-section">
+                <h2 class="vault-section-title" onclick="toggleVaultSection(this)">&gt; current_obsession</h2>
+                <div class="vault-section-body">
+                    <div class="vault-obsession">
+                        <h3>&gt; agentic AI + workflow automation</h3>
+                        <p>the idea that you can build systems that think, decide, and act on your behalf is one of the more interesting things happening in any field right now.</p>
+                        <p>spending serious time here. reading, building, breaking things, building them better.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- hardware_shelf -->
+            <div class="vault-section">
+                <h2 class="vault-section-title" onclick="toggleVaultSection(this)">&gt; hardware_shelf</h2>
+                <div class="vault-section-body">
+                    <p>what's in rotation:</p>
+                    <ul class="vault-list vault-list-mono">
+                        <li>Raspberry Pi cyberdecks</li>
+                        <li>Flipper Zero</li>
+                        <li>RF / microphone / camera detectors</li>
+                        <li>mesh radio nodes</li>
+                        <li>various devices that make IT people visibly uncomfortable</li>
+                    </ul>
+                    <p>blame a military buddy with similar tendencies and a channel called Call Me Koko.</p>
+                    <p><strong>conventions:</strong> DEF CON. CactusCon. BSides. hardware badges. soldering iron. the usual.</p>
+                    <figure class="vault-photo vault-photo-wide">
+                        <img src="assets/vault/airborne-jump.jpg" alt="Combat load airborne jump" onerror="this.parentElement.style.display='none';">
+                        <figcaption>one of the first combat load jumps</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- find_me -->
+            <div class="vault-section">
+                <h2 class="vault-section-title" onclick="toggleVaultSection(this)">&gt; find_me</h2>
+                <div class="vault-section-body">
+                    <p><strong>Discord (personal):</strong></p>
+                    <p><a href="https://discord.com/channels/1446227624408911896/1446227625113813084" target="_blank" rel="noopener" class="vault-discord-btn">[ join discord &rarr; ]</a></p>
+                    <pre class="vault-contact-block">
+email:     jake@packetpursuit.net
+portfolio: packetpursuit.net
+github:    github.com/PacketPursuit
+</pre>
+                </div>
+            </div>
+
+            <!-- Closing -->
+            <div class="vault-closing">
+                <p>&gt; you found it. that was the point.</p>
+                <p>&nbsp;&nbsp;drop a line if you want to talk, <a href="mailto:jake@packetpursuit.net">jake@packetpursuit.net</a></p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 PacketPursuit | Jacob Wills | recon | exploit &amp;&amp; defend | repeat &gt;&gt; theGrind.log</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/vault.js"></script>
+</body>
+</html>

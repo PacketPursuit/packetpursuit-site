@@ -27,7 +27,12 @@
       "Bash(cp \"Malware Alerts ELK.png\" screenshots/malware-detection-alerts.png)",
       "Bash(cp \"Terminal 1.png\" screenshots/terminal-kinsing.png)",
       "Bash(cp \"Initail Alerts details.png\" screenshots/alert-details.png)",
-      "Bash(ls *.pdf *.png)"
+      "Bash(ls *.pdf *.png)",
+      "Bash(cp \"Coins.png\" coins.png)",
+      "Bash(cp \"My Daughter.png\" daughter.png)",
+      "Bash(cp \"One of my crazy Dogs named Kiaba.JPG\" dog-kiaba.jpg)",
+      "Bash(cp \"One of my first combat load jumps.jpg\" airborne-jump.jpg)",
+      "Bash(cp \"some Highstakes Poker.jpg\" poker.jpg)"
     ]
   }
 }

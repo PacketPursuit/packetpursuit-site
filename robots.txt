@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /vault/
+Disallow: /assets/
+
+# PP{OfF_th3_cL0ck}
